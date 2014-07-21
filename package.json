@@ -1,0 +1,17 @@
+{
+  "name": "mcapcli-serverconfig",
+  "version": "0.0.0",
+  "description": "Interface to configure multiple mCAP server.",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "author": "mwaylabs",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "rc": "^0.4.0"
+  },
+  "devDependencies": {
+    "tap": "^0.4.11"
+  }
+}

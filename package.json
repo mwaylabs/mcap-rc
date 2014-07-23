@@ -1,5 +1,5 @@
 {
-  "name": "mcapcli-serverconfig",
+  "name": "mcap-rc",
   "version": "0.0.0",
   "description": "Interface to configure multiple mCAP server.",
   "main": "index.js",

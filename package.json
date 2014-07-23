@@ -1,7 +1,7 @@
 {
-  "name": "mcap-rc",
+  "name": "mcaprc",
   "version": "0.0.0",
-  "description": "Interface to configure multiple mCAP server.",
+  "description": "Switch between different .mcaprc files with ease and grace",
   "main": "index.js",
   "scripts": {
     "test": "tap test/*.js"

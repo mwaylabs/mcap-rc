@@ -5,15 +5,15 @@ Interface to configure multiple mCAP server.
 ## Install
 
 ```
-git clone https://github.com/mwaylabs/mcapcli-serverconfig.git
-cd mcapcli-serverconfig
+git clone https://github.com/mwaylabs/mcap-rc.git
+cd mcap-rc
 npm install
 ```
 
 ## Usage
 
 ```
-var mCAPrc = require('mcapcli-serverconfig');
+var mCAPrc = require('mcap-rc');
 // list all server
 mCAPrc.list();
 // add a server

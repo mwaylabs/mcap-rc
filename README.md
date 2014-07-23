@@ -5,23 +5,23 @@ Interface to configure multiple mCAP server.
 ## Install
 
 ```
-git clone https://github.com/mwaylabs/mcap-rc.git
-cd mcap-rc
+git clone https://github.com/mwaylabs/mcaprc.git
+cd mcaprc
 npm install
 ```
 
 ## Usage
 
 ```
-var mCAPrc = require('mcap-rc');
+var mcaprc = require('mcaprc');
 // list all server
-mCAPrc.list();
+mcaprc.list();
 // add a server
-mCAPrc.add(['name', 'baseurl', 'username', 'password']);
+mcaprc.add(['name', 'baseurl', 'username', 'password']);
 // set the default server
-mCAPrc.setDefault('name');
+mcaprc.setDefault('name');
 // remove a server
-mCAPrc.remove('name');
+mcaprc.remove('name');
 ```
 
 ## Test

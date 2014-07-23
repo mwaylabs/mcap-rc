@@ -40,7 +40,7 @@ function add( attr ) {
         "username": attr[2] || '',
         "password": attr[3] || ''
     };
-    var conf = rc('mcapcli', _deepCopy(defaultConf), newServer);
+    var conf = rc('mcap', _deepCopy(defaultConf), newServer);
     if(!conf.default){
         conf.default = attr[0];
     }
@@ -53,7 +53,7 @@ function add( attr ) {
  */
 function get() {
     // get the config
-    return rc('mcapcli', _deepCopy(defaultConf));
+    return rc('mcap', _deepCopy(defaultConf));
 }
 
 /**

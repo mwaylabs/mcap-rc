@@ -9,7 +9,7 @@ var defaultConf = {
 
 var emptyConf = {
     default: '',
-    config: cc.find('.mcapclirc'),
+    config: cc.find('.mcaprc'),
     _: []
 };
 

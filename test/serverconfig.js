@@ -200,3 +200,50 @@ tap.test('default', function( t ) {
 
 
 });
+
+
+tap.test('get', function( t ) {
+
+    reset();
+    serverConfig.add(['a', 'b', 'c', 'd']);
+    serverConfig.add(['a1', 'b1', 'c1', 'd1']);
+    serverConfig.add(['a2', 'b2', 'c2', 'd2']);
+
+
+    t.deepEqual(serverConfig.get('default'), {
+        "baseurl": "b",
+        "username": "c",
+        "password": "d"
+    });
+
+    t.deepEqual(serverConfig.get('a'), {
+        "baseurl": "b",
+        "username": "c",
+        "password": "d"
+    });
+
+    serverConfig.setDefault('a1');
+
+    t.deepEqual(serverConfig.get('default'), {
+        "baseurl": "b1",
+        "username": "c1",
+        "password": "d1"
+    });
+
+    t.deepEqual(serverConfig.get('a1'), {
+        "baseurl": "b1",
+        "username": "c1",
+        "password": "d1"
+    });
+
+    t.deepEqual(serverConfig.get('a2'), {
+        "baseurl": "b2",
+        "username": "c2",
+        "password": "d2"
+    });
+
+    t.deepEqual(serverConfig.get('xxx'), false);
+
+    reset();
+    t.end();
+});

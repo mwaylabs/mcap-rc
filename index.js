@@ -49,11 +49,27 @@ function add( attr ) {
 
 /**
  * Returns all settings
+ * no param will return all configurations - if param exists then return the specific one - if none is found return false
+ * @param param
  * @returns {*}
  */
-function get() {
+function get(param) {
     // get the config
-    return rc('mcap', _deepCopy(defaultConf));
+    var config = rc('mcap', _deepCopy(defaultConf));
+    // return all configs if no param is given
+    if(!param){
+        // get the config
+        return config
+    } else if(config[param]){
+        if(param === 'default'){
+            // return the default one if param is default
+            return config[config[param]];
+        }
+        // return the param one
+        return config[param];
+    }
+    // otherwise return false
+    return false;
 }
 
 /**
@@ -157,3 +173,4 @@ module.exports.list = list;
 module.exports.info = info;
 module.exports.setDefault = setDefault;
 module.exports.remove = remove;
+module.exports.get = get;

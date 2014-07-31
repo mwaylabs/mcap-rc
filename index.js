@@ -1,9 +1,12 @@
 var fs = require('fs');
 var rc = require('rc');
+var path = require('path');
 
 var defaultConf = {
     "default": ""
 };
+
+var rcName = 'mcap';
 
 /**
  * Select operation to given command
@@ -40,7 +43,7 @@ function add( attr ) {
         "username": attr[2] || '',
         "password": attr[3] || ''
     };
-    var conf = rc('mcap', _deepCopy(defaultConf), newServer);
+    var conf = rc(rcName, _deepCopy(defaultConf), newServer);
     if(!conf.default){
         conf.default = attr[0];
     }
@@ -55,7 +58,7 @@ function add( attr ) {
  */
 function get(param) {
     // get the config
-    var config = rc('mcap', _deepCopy(defaultConf));
+    var config = rc(rcName, _deepCopy(defaultConf));
     // return all configs if no param is given
     if(!param){
         // get the config
@@ -136,9 +139,13 @@ function setDefault( attr ) {
  */
 function _save(conf){
     // get the path
-    var path = conf.config;
+    var _path = conf.config;
+    // if no path is set the rc file doesn't exists
+    if(!_path){
+        _path = path.normalize(getUserHome() + '/.' + rcName + 'rc');
+    }
     // write a clean version of it
-    fs.writeFileSync(path, JSON.stringify(_clean(conf), null, 3));
+    fs.writeFileSync(_path, JSON.stringify(_clean(conf), null, 3));
     return conf;
 }
 
@@ -165,6 +172,14 @@ function _clean(conf){
  */
 function _deepCopy(conf){
     return JSON.parse(JSON.stringify(conf));
+}
+
+/**
+ * returns the home dir of the user
+ * @returns {*}
+ */
+function getUserHome() {
+    return process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
 }
 
 module.exports.parse = parse;

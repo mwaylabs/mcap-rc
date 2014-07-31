@@ -29,6 +29,9 @@ function parse(command, attr) {
     else if (command === 'default') {
         setDefault(attr[0]);
     }
+    else {
+        list(attr);
+    }
 }
 
 /**

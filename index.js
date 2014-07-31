@@ -13,16 +13,20 @@ var rcName = 'mcap';
  * @param command the operation
  * @param attr the config attributes
  */
-function parse( command, attr ) {
-    if( command === 'add' ) {
+function parse(command, attr) {
+    if (command === 'add') {
         add(attr);
-    } else if( command === 'list' ) {
+    }
+    else if (command === 'list') {
         list(attr);
-    } else if( command === 'info' ) {
+    }
+    else if (command === 'info') {
         info(attr);
-    } else if( command === 'remove' ) {
+    }
+    else if (command === 'remove') {
         remove(attr);
-    } else if( command === 'default' ) {
+    }
+    else if (command === 'default') {
         setDefault(attr[0]);
     }
 }
@@ -32,8 +36,8 @@ function parse( command, attr ) {
  * @param attr ['name', 'baseurl', 'username', 'password']
  * @returns {*}
  */
-function add( attr ) {
-    if( !attr || !Array.isArray(attr) || !attr[0] ) {
+function add(attr) {
+    if (!attr || !Array.isArray(attr) || !attr[0]) {
         return get();
     }
 
@@ -44,7 +48,7 @@ function add( attr ) {
         "password": attr[3] || ''
     };
     var conf = rc(rcName, _deepCopy(defaultConf), newServer);
-    if(!conf.default){
+    if (!conf.default) {
         conf.default = attr[0];
     }
     return _save(conf);
@@ -60,11 +64,12 @@ function get(param) {
     // get the config
     var config = rc(rcName, _deepCopy(defaultConf));
     // return all configs if no param is given
-    if(!param){
+    if (!param) {
         // get the config
         return config
-    } else if(config[param]){
-        if(param === 'default'){
+    }
+    else if (config[param]) {
+        if (param === 'default') {
             // return the default one if param is default
             return config[config[param]];
         }
@@ -97,8 +102,8 @@ function info() {
  * @param attr
  * @returns {*}
  */
-function remove( attr ) {
-    if( !attr ) {
+function remove(attr) {
+    if (!attr) {
         return;
     }
     var rem = Array.isArray(attr) ? attr[0] : attr;
@@ -107,7 +112,7 @@ function remove( attr ) {
     // delete the given server
     delete conf[rem];
     // [ 'default', 'config', '_' ]
-    if(Object.keys(conf).length <= 3){
+    if (Object.keys(conf).length <= 3) {
         // reset default if no server is present
         conf.default = defaultConf.default;
     }
@@ -119,13 +124,13 @@ function remove( attr ) {
  * @param attr {string} the default value
  * @returns {*}
  */
-function setDefault( attr ) {
-    if( !attr || typeof attr !== 'string' ) {
+function setDefault(attr) {
+    if (!attr || typeof attr !== 'string') {
         return;
     }
     // get the config
     var conf = get();
-    if(conf && conf['default'] && conf[attr]){
+    if (conf && conf['default'] && conf[attr]) {
         conf['default'] = attr;
         return _save(conf);
     }
@@ -137,11 +142,11 @@ function setDefault( attr ) {
  * @returns {*}
  * @private
  */
-function _save(conf){
+function _save(conf) {
     // get the path
     var _path = conf.config;
     // if no path is set the rc file doesn't exists
-    if(!_path){
+    if (!_path) {
         _path = path.normalize(getUserHome() + '/.' + rcName + 'rc');
     }
     // write a clean version of it
@@ -155,7 +160,7 @@ function _save(conf){
  * @returns {*}
  * @private
  */
-function _clean(conf){
+function _clean(conf) {
     // deep copy
     var copy = _deepCopy(conf);
     // remove rc attributes
@@ -170,7 +175,7 @@ function _clean(conf){
  * @returns {*}
  * @private
  */
-function _deepCopy(conf){
+function _deepCopy(conf) {
     return JSON.parse(JSON.stringify(conf));
 }
 

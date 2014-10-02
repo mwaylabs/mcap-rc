@@ -1,13 +1,12 @@
 # mCAP Serverconfig
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
 Interface to configure multiple mCAP server.
 
 ## Install
 
 ```
-git clone https://github.com/mwaylabs/mcaprc.git
-cd mcaprc
-npm install
+npm install mcaprc
 ```
 
 ## Usage
@@ -27,10 +26,12 @@ mcaprc.remove('name');
 ## Test
 
 ```
-tap test/*.js
+npm test
 ```
 
-## Changelog
-
-### v0.1.0
-- made get method public: no param will return all configurations - if param exists then return the specific one - if none is found return false
+[npm-url]: https://npmjs.org/package/mcaprc
+[npm-image]: https://badge.fury.io/js/mcaprc.svg
+[travis-url]: https://travis-ci.org/mwaylabs/mcaprc
+[travis-image]: https://travis-ci.org/mwaylabs/mcaprc.svg?branch=master
+[daviddm-url]: https://david-dm.org/mwaylabs/mcaprc.svg?theme=shields.io
+[daviddm-image]: https://david-dm.org/mwaylabs/mcaprc

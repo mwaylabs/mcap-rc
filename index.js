@@ -8,6 +8,7 @@ var defaultConf = {
 
 var rcName = 'mcap';
 
+
 /**
  * Select operation to given command
  * @param command the operation
@@ -18,19 +19,17 @@ function parse(command, attr) {
         add(attr);
     }
     else if (command === 'list') {
-        list(attr);
-    }
-    else if (command === 'info') {
-        info(attr);
+
+        return list(attr);
     }
     else if (command === 'remove') {
-        remove(attr);
+        return remove(attr);
     }
     else if (command === 'default') {
-        setDefault(attr[0]);
+        return setDefault(attr[0]);
     }
     else {
-        list(attr);
+        return list(attr);
     }
 }
 
@@ -64,23 +63,28 @@ function add(attr) {
  * @returns {*}
  */
 function get(param) {
-    // get the config
-    var config = rc(rcName, _deepCopy(defaultConf));
-    // return all configs if no param is given
-    if (!param) {
-        // get the config
-        return config
-    }
-    else if (config[param]) {
-        if (param === 'default') {
-            // return the default one if param is default
-            return config[config[param]];
+//    console.log('param',param);
+    try{
+        var config = rc(rcName, _deepCopy(defaultConf));
+        //console.log(config);
+
+
+        if (!param) {
+            // get the config
+            return config
         }
-        // return the param one
-        return config[param];
+        else if (config[param]) {
+            if (param === 'default') {
+                // return the default one if param is default
+                return config[config[param]];
+            }
+            // return the param one
+            return config['server'][param];
+        }
+        return false;
+    }catch(e){
+        console.error(e);
     }
-    // otherwise return false
-    return false;
 }
 
 /**
@@ -91,14 +95,10 @@ function list() {
     // get the config
     var conf = get();
     // print a cleaned version
-    console.log(JSON.stringify(_clean(conf), null, 5));
+    //console.log(JSON.stringify(_clean(conf), null, 5));
     return conf;
 }
 
-function info() {
-    // TODO
-    return list();
-}
 
 /**
  * Remove a configuration
@@ -193,7 +193,6 @@ function getUserHome() {
 module.exports.parse = parse;
 module.exports.add = add;
 module.exports.list = list;
-module.exports.info = info;
 module.exports.setDefault = setDefault;
 module.exports.remove = remove;
 module.exports.get = get;

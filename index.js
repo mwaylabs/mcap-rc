@@ -143,7 +143,6 @@ function setDefault(attr) {
     var conf = get();
     if ( conf && conf[ 'server' ][ attr ] ) {
         conf[ DEFAULT ] = attr;
-        console.log('testdefault', conf[ DEFAULT ]);
         _save(conf);
         return true;
     } else {

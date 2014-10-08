@@ -83,19 +83,18 @@ function get(param) {
         var config = rc(rcName, _deepCopy(defaultConf), []);
         if ( !param ) {
             // get the config
-            return config
+            return config;
         }
-        else if ( config[ param ] ) {
-            if ( param === DEFAULT ) {
-                // return the default one if param is default
-                return config[ config[ param ] ];
-            }
-            // return the param one
+        else if(param === DEFAULT){
+            var defaultServer = config[DEFAULT];
+            return config['server'][defaultServer];
+        }
+        else if ( config['server'][ param ] ) {
             return config[ 'server' ][ param ];
         }
         return false;
     } catch ( e ) {
-        console.error(chalk.red(e));
+        console.error('Error on Get',chalk.red(e));
     }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "mcaprc",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Switch between different .mcaprc files with ease and grace",
   "main": "index.js",
   "scripts": {
